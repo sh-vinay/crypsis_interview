@@ -184,16 +184,23 @@ class DictApp
   end
   
   def display_hint(word)
-   num = Random.rand(1...4)
+   while 1
+     num = Random.rand(1...5)
                case num
                    when 1 then  self.definitions(word)
                    when 2 then  self.synonyms(word)
                    when 3 then  self.antonyms(word)
+                   when 4 then  puts "Randomly jumbled word:  #{word.split(//).sort_by{rand}.join()}"
               end
-
+            if(@@wrong_word == 1)
+                @@wrong_word = 0
+                 next
+             else
+               break
+        end
+    end
   end
- 
-end
+ end
 
  dictApp = DictApp.new()
 if ARGV.blank? then
